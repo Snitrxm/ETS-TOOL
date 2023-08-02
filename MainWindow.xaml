@@ -7,15 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="876">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="509*"/>
-            <ColumnDefinition Width="367*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="profileEtsFolderButton" Content="Profile ETS Folder" HorizontalAlignment="Left" Margin="219,10,0,0" VerticalAlignment="Top" Width="117" Click="profileEtsFolderButton_Click" Grid.Column="1"/>
-        <Button x:Name="LoadEtsInfoButton" Content="Load ETS Info" HorizontalAlignment="Left" Margin="219,47,0,0" VerticalAlignment="Top" Width="117" Click="LoadEtsInfoButton_Click" Grid.Column="1"/>
-        <Label Content="ETS PROFILES" HorizontalAlignment="Left" Margin="237,92,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.37,-1.039" Grid.Column="1"/>
-        <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" Margin="219,123,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="profilesComboBox_SelectionChanged" Grid.Column="1"/>
-        <Button x:Name="editProfileNameButton" Content="Edit Profile Name" HorizontalAlignment="Left" Margin="219,161,0,0" VerticalAlignment="Top" Width="120" Click="editProfileNameButton_Click" Grid.Column="1"/>
-
+        <Button x:Name="profileEtsFolderButton" Content="Profile ETS Folder" HorizontalAlignment="Left" Margin="728,10,0,0" VerticalAlignment="Top" Width="117" Click="profileEtsFolderButton_Click"/>
+        <Button x:Name="LoadEtsInfoButton" Content="Load ETS Info" HorizontalAlignment="Left" Margin="728,47,0,0" VerticalAlignment="Top" Width="117" Click="LoadEtsInfoButton_Click"/>
+        <Label Content="ETS PROFILES" HorizontalAlignment="Left" Margin="746,92,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.37,-1.039"/>
+        <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" Margin="728,123,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="profilesComboBox_SelectionChanged"/>
+        <Button x:Name="editProfileNameButton" Content="Edit Profile Name" HorizontalAlignment="Left" Margin="728,161,0,0" VerticalAlignment="Top" Width="120" Click="editProfileNameButton_Click"/>
+        <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top">
+            <Button x:Name="ProfilePageButton" Content="Profile" MinWidth="50" Click="ProfilePageButton_Click"/>
+            <Button x:Name="CargosPageButton" Content="Cargos" MinWidth="50" Click="CargosPageButton_Click" />
+        </StackPanel>
+        <Frame x:Name="Main" Margin="0,20,148,0" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

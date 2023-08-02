@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using ETS_TOOL.Classes;
+using System.Text;
 
 namespace ETS_TOOL
 {
@@ -69,9 +70,16 @@ namespace ETS_TOOL
                                 string currentLine = profileDataFile[line];
                                 if (currentLine.Contains("profile_name"))
                                 {
-                                    profileNames.Add(currentLine.Split(new char[] { ':' })[1].TrimStart().TrimEnd().Replace("\"", ""));
-                                    profileIds.Add(file.Split(new char[] { '\\' })[8].TrimStart().TrimEnd());
-                                    profiles.Add(currentLine.Split(new char[] { ':' })[1].TrimStart().TrimEnd().Replace("\"", ""), file.Split(new char[] { '\\' })[8].TrimStart().TrimEnd());
+                                    string name = currentLine.Split(new char[] { ':' })[1].TrimStart().TrimEnd().Replace("\"", "");
+                                    byte[] newNameByte = Encoding.Default.GetBytes(name);
+                                    string hexNewName = Convert.ToHexString(newNameByte);
+                                    foreach (string path in file.Split(new char[] { '\\' })) {
+                                        if (path == hexNewName) {
+                                            profileNames.Add(name);
+                                            profileIds.Add(hexNewName);
+                                            profiles.Add(name, hexNewName);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -88,10 +96,9 @@ namespace ETS_TOOL
 
         private void HandleProfileClick(object sender, EventArgs e, string profileId)
         {
-            string _gameSIIFilePath = String.Format(@"C:\Program Files (x86)\Steam\userdata\297974754\227300\remote\profiles\{0}\save\autosave\game.sii", profileId);
-            _selectedProfileFolder = String.Format(@"C:\Program Files (x86)\Steam\userdata\297974754\227300\remote\profiles\{0}", profileId);
+            string _gameSIIFilePath = String.Format(@"{0}\{1}\save\autosave\game.sii", _profilesFolder, profileId);
+            _selectedProfileFolder = String.Format(@"{0}\{1}",_profilesFolder, profileId);
             string[] decodedProfileFile = decrypt.NewDecodeFile(_selectedProfileFolder + @"\profile.sii");
-
             profile = new Profile(decodedProfileFile, _selectedProfileFolder);
             dataFile = decrypt.NewDecodeFile(_gameSIIFilePath);
             if (dataFile == null)
@@ -140,7 +147,7 @@ namespace ETS_TOOL
                 }
                 loadedInfo = true;
             }
-            // MessageBox.Show(String.Format("Profile With id {0} selected", profileId));
+            Main.Content = new ProfilePage(profile, bank, economy);
         }
 
         private void profilesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -161,6 +168,20 @@ namespace ETS_TOOL
                 LoadEtsInfoButton_Click(sender, e);
 
             }
+        }
+
+        private void CargosPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new CargosPage();
+        }
+
+        private void ProfilePageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(loadedInfo == false) {
+                MessageBox.Show("Should load ets info first.");
+                return;
+            }
+            Main.Content = new ProfilePage(profile, bank, economy);
         }
     }
 }

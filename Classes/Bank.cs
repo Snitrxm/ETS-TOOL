@@ -17,13 +17,12 @@ namespace ETS_TOOL.Classes
         public Bank(string bankIdentificator, string[] _file, string profileId)
         {
             _dataFile = _file;
-            _dataFilePath = String.Format(@"C:\Program Files (x86)\Steam\userdata\297974754\227300\remote\profiles\{0}\save\autosave\game.sii", profileId);
+            _dataFilePath = String.Format($@"C:\Users\{Environment.UserName}\Documents\Euro Truck Simulator 2\profiles\{profileId}\save\autosave\game.sii");
             for (int line = 0; line <= _file.Length - 1; line++)
             {
                 string currentLine = _file[line];
                 if (currentLine.Contains(bankIdentificator) && currentLine.Contains("{"))
                 {
-                    //First line after bank identificator
                     string money_account = _file[line + 1];
                     string money_value = money_account.Split(new char[] { ':' })[1];
                     money_dict.Add("money_line", line + 1);
@@ -40,6 +39,11 @@ namespace ETS_TOOL.Classes
             _dataFile[money_line] = String.Format("money_account: {0}", new_money.ToString());
             File.WriteAllText(_dataFilePath, string.Join(Environment.NewLine, _dataFile));
             MessageBox.Show("Money updated successfully!");
+        }
+
+        public Dictionary<string, dynamic> GetBankInfo()
+        {
+            return money_dict;
         }
     }
 }
