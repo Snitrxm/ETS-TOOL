@@ -14,14 +14,14 @@ namespace ETS_TOOL.Classes
         private string[] _dataFile;
         private readonly string _dataFilePath = string.Empty;
 
-        public Bank(string bankIdentificator, string[] _file, string profileId)
+        public Bank(string bankIdentificator, string[] _file, string profileId, string _profileFolder)
         {
             _dataFile = _file;
-            _dataFilePath = String.Format($@"C:\Users\{Environment.UserName}\Documents\Euro Truck Simulator 2\profiles\{profileId}\save\autosave\game.sii");
+            _dataFilePath = String.Format($@"{_profileFolder}\{profileId}\save\autosave\game.sii");
             for (int line = 0; line <= _file.Length - 1; line++)
             {
                 string currentLine = _file[line];
-                if (currentLine.Contains(bankIdentificator) && currentLine.Contains("{"))
+                if (currentLine.Contains(bankIdentificator) && currentLine.Contains('{'))
                 {
                     string money_account = _file[line + 1];
                     string money_value = money_account.Split(new char[] { ':' })[1];

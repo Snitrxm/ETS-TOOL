@@ -136,7 +136,7 @@ namespace ETS_TOOL
                         }
                     case "bank":
                         {
-                            bank = new Bank(dataLine, dataFile, profileId);
+                            bank = new Bank(dataLine, dataFile, profileId, _profilesFolder);
                             break;
                         }
                     case "economy":
