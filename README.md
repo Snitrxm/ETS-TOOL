@@ -1,7 +1,7 @@
 # ETS-TOOL
 
-#README Languages
-[](README-PT.md)
+# README Languages
+[https://github.com/Snitrxm/ETS-TOOL/blob/master/README-PT.md](README-PT.md)
 
 # What's is ETS-TOOL?
 ETS-TOOL is a tool to change ETS (Euro Truck Simulator) files.
