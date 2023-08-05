@@ -6,16 +6,56 @@
         xmlns:local="clr-namespace:ETS_TOOL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="876">
+    <Window.Resources>
+        <Style x:Key="BotaoArredondado" TargetType="Button">
+            <Setter Property="Padding" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="3">
+                            </Border>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Content}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0F0F2D"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button x:Name="profileEtsFolderButton" Content="Profile ETS Folder" HorizontalAlignment="Left" Margin="728,10,0,0" VerticalAlignment="Top" Width="117" Click="profileEtsFolderButton_Click"/>
-        <Button x:Name="LoadEtsInfoButton" Content="Load ETS Info" HorizontalAlignment="Left" Margin="728,47,0,0" VerticalAlignment="Top" Width="117" Click="LoadEtsInfoButton_Click"/>
-        <Label Content="ETS PROFILES" HorizontalAlignment="Left" Margin="746,92,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.37,-1.039"/>
-        <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" Margin="728,123,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="profilesComboBox_SelectionChanged"/>
-        <Button x:Name="editProfileNameButton" Content="Edit Profile Name" HorizontalAlignment="Left" Margin="728,161,0,0" VerticalAlignment="Top" Width="120" Click="editProfileNameButton_Click"/>
-        <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top">
-            <Button x:Name="ProfilePageButton" Content="Profile" MinWidth="50" Click="ProfilePageButton_Click"/>
-            <Button x:Name="CargosPageButton" Content="Cargos" MinWidth="50" Click="CargosPageButton_Click" />
+        <Button x:Name="profileEtsFolderButton" Style="{StaticResource BotaoArredondado}" Content="{DynamicResource Profile ETS Folder}" HorizontalAlignment="Left" Margin="726,52,0,0" VerticalAlignment="Top" Width="117" Click="profileEtsFolderButton_Click" Height="25"/>
+        <Button x:Name="LoadEtsInfoButton"  Style="{StaticResource BotaoArredondado}" Content="{DynamicResource Load ETS Info}" HorizontalAlignment="Left" Margin="726,82,0,0" VerticalAlignment="Top" Width="117" Click="LoadEtsInfoButton_Click" Height="25"/>
+        <Label Content="{DynamicResource ETS PROFILES}" HorizontalAlignment="Left" Margin="745,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.37,-1.039"/>
+        <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" Margin="726,156,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="profilesComboBox_SelectionChanged"/>
+        <Button x:Name="editProfileNameButton" Style="{StaticResource BotaoArredondado}" Content="{DynamicResource Edit Profile Name}" HorizontalAlignment="Left" Margin="726,192,0,0" VerticalAlignment="Top" Width="120" Click="editProfileNameButton_Click" Height="25"/>
+        <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Top" Background="#0F0F2D" Grid.ColumnSpan="2" >
+            <TextBlock Text="ETS TOOL" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="White" FontSize="16" FontWeight="Bold" />
+            <TextBlock Foreground="White" Margin="30,0,0,0" VerticalAlignment="Center" FontWeight="Medium" FontFamily="Arial">
+                <Hyperlink Click="ProfilePageButton_Click" TextDecorations="None">
+                    <TextBlock Text="{DynamicResource Profile}" Foreground="White"/>
+                 </Hyperlink>
+            </TextBlock>
+            <TextBlock Foreground="White" Margin="30,0,0,0" VerticalAlignment="Center" FontWeight="Medium" FontFamily="Arial" IsEnabled="false">
+                <Hyperlink Click="CargosPageButton_Click" TextDecorations="None">
+                    <TextBlock Text="{DynamicResource Cargos}" Foreground="White"/>
+                 </Hyperlink>
+            </TextBlock>
+            <ComboBox x:Name="LanguagesComboBox" Width="99" SelectionChanged="LanguagesComboBox_SelectionChanged" Height="24" Margin="20,0,0,0">
+                <ComboBoxItem Content="English"/>
+                <ComboBoxItem Content="Turkish"/>
+            </ComboBox>
         </StackPanel>
-        <Frame x:Name="Main" Margin="0,20,148,0" NavigationUIVisibility="Hidden" />
+        <Frame x:Name="Main" Margin="0,40,150,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

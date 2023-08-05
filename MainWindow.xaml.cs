@@ -23,10 +23,14 @@ namespace ETS_TOOL
         private Economy economy;
         private string[] dataFile;
         private bool loadedInfo = false;
+        public ProfilePage profilePage;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            LanguagesComboBox.SelectedIndex = 0;
+            SwitchLanguage("en");
         }
 
         private void profileEtsFolderButton_Click(object sender, RoutedEventArgs e)
@@ -141,13 +145,14 @@ namespace ETS_TOOL
                         }
                     case "economy":
                         {
-                            economy = new Economy(dataFile, profileId);
+                            economy = new Economy(dataFile, profileId, _profilesFolder);
                             break;
                         }
                 }
                 loadedInfo = true;
             }
-            Main.Content = new ProfilePage(profile, bank, economy);
+            profilePage = new ProfilePage(profile, bank, economy);
+            Main.Content = profilePage;
         }
 
         private void profilesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -181,7 +186,31 @@ namespace ETS_TOOL
                 MessageBox.Show("Should load ets info first.");
                 return;
             }
-            Main.Content = new ProfilePage(profile, bank, economy);
+            profilePage = new ProfilePage(profile, bank, economy);
+            Main.Content = profilePage;
+        }
+
+        private void LanguagesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedLanguage = LanguagesComboBox.SelectedIndex == 0 ? "en" : "tr";
+            SwitchLanguage(selectedLanguage);
+            profilePage?.SwitchLanguage(selectedLanguage);
+
+        }
+
+        public void SwitchLanguage(string code)
+        {
+            ResourceDictionary dict = new();
+            switch (code)
+            {
+                case "en":
+                    dict.Source = new Uri("..\\Resources\\Languages\\en-US.xaml", UriKind.Relative);
+                    break;
+                case "tr":
+                    dict.Source = new Uri("..\\Resources\\Languages\\tr-TR.xaml", UriKind.Relative);
+                    break;
+            }            
+            this.Resources.MergedDictionaries.Add(dict);
         }
     }
 }

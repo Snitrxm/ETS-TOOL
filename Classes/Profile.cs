@@ -26,8 +26,6 @@ namespace ETS_TOOL.Classes
 
             _profileDataPath = profileDataPath + @"\profile.sii";
 
-            System.Diagnostics.Debug.WriteLine(profileDataPath);
-
             string[] pathParts = profileDataPath.Split(new char[] { '\\' });
 
             profile.Add("id", pathParts[pathParts.Length - 1]);
@@ -35,7 +33,6 @@ namespace ETS_TOOL.Classes
             {
                 
                 string currentLine = _profileDataFile[line];
-                System.Diagnostics.Debug.WriteLine(line);
                 if (currentLine.Contains("profile_name"))
                 {   
                     profileInfoDict.Add("profile_name_line", line);
@@ -54,7 +51,15 @@ namespace ETS_TOOL.Classes
             {
                 string basePath = Path.GetDirectoryName(_rootProfileDataPath);
                 string newFolderPath = Path.Combine(basePath, hexNewName);;
-                _profileDataFile[profileInfoDict["profile_name_line"]] = String.Format("profile_name: {0}", new_name);
+                if(new_name.Contains(' '))
+                {
+                    _profileDataFile[profileInfoDict["profile_name_line"]] = String.Format("profile_name: \"{0}\"", new_name);
+                } else
+                {
+                    _profileDataFile[profileInfoDict["profile_name_line"]] = String.Format("profile_name: {0}", new_name);
+                }
+
+                
                 File.WriteAllText(_rootProfileDataPath + @"\profile.sii", string.Join(Environment.NewLine, _profileDataFile));
                 Directory.Move(_rootProfileDataPath, newFolderPath);
                 Directory.Delete(_rootProfileDataPath);

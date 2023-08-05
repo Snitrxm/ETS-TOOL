@@ -9,14 +9,18 @@
       Title="ProfilePage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="141*"/>
-            <ColumnDefinition Width="659*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock x:Name="ProfileNameText" HorizontalAlignment="Left" Margin="22,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" Grid.ColumnSpan="2" FontSize="16"><Run Text="Name: TEST"/><LineBreak/><Run/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="22,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" FontSize="16" FontWeight="Bold" Height="27"><Run Text="PROFILE INFOS"/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="MoneyText" HorizontalAlignment="Left" Margin="22,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.ColumnSpan="2" FontSize="16"><Run Text="Money: 0"/><LineBreak/><Run/></TextBlock>
-        <Button x:Name="UpdateMoneyButton" Grid.Column="1" Content="Update Money" HorizontalAlignment="Left" Margin="69,71,0,0" VerticalAlignment="Top" Width="104" Click="UpdateMoneyButton_Click"/>
+
+        <TextBlock x:Name="ProfileNameText" HorizontalAlignment="Left" Margin="22,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Height="43"><Run Text="{DynamicResource Name}"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="22,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" FontSize="16" FontWeight="Bold" Height="27"><Run Text="{DynamicResource PROFILE INFOS}"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="MoneyText" HorizontalAlignment="Left" Margin="22,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" FontSize="16" Text="{DynamicResource Money}" Height="21" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="MoneyTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="95,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="MoneyTextBox_TextChanged" Height="18"/>
+        <Button x:Name="SaveChangesButton" Content="{DynamicResource Save Changes}" HorizontalAlignment="Left" Margin="22,16,0,0" Grid.Row="1" VerticalAlignment="Top" Width="146" Click="SaveChangesButton_Click" Height="20"/>
+        <TextBlock x:Name="ExperiencePointsText" HorizontalAlignment="Left" Margin="22,106,0,0" TextWrapping="Wrap" Text="{DynamicResource Experience Points}" VerticalAlignment="Top" FontSize="16" Width="140" Height="21" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="ExperiencePointsTextBox" HorizontalAlignment="Left" Margin="162,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="ExperiencePointsTextBox_TextChanged" Height="18"/>
     </Grid>
 </Page>

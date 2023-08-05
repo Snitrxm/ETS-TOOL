@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Profile">Profile</system:String>
+    <system:String x:Key="Cargos">Cargos</system:String>
+    <system:String x:Key="Profile ETS Folder">Profile ETS Folder</system:String>
+    <system:String x:Key="Load ETS Info">Load ETS Info</system:String>
+    <system:String x:Key="ETS PROFILES">ETS PROFILES</system:String>
+    <system:String x:Key="Edit Profile Name">Edit Profile Name</system:String>
+    <system:String x:Key="PROFILE INFOS">PROFILE INFOS</system:String>
+    <system:String x:Key="Name">Name</system:String>
+    <system:String x:Key="Money">Money: </system:String>
+    <system:String x:Key="Save Changes">Save Changes</system:String>
+    <system:String x:Key="Experience Points">Experience Points: </system:String>
+</ResourceDictionary>
